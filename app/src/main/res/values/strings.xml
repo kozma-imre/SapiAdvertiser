@@ -1,10 +1,29 @@
 <resources>
     <string name="app_name">SapiAdvertiser</string>
-   
+
     <string name="title_activity_advertisement_list">AdvertisementListActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_my_advertisements">MyAdvertisementsActivity</string>
+    <string name="phonenumber_edittext_hint">Phone Number</string>
+    <string name="login_btn_text">Login</string>
+    <string name="new_account_text_link">Need a new account?</string>
+    <string name="signup_btn_text">SignUp</string>
+    <string name="signout_btn">SignOut</string>
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="invalid_phone_number">Invalid phone number. Try again.</string>
+    <string name="invalid_credential">Invalid Credential.</string>
+    <string name="too_many_requests">Too many requests.</string>
+    <string name="verify_code">Verify code.</string>
+    <string name="loading_advertisers">Loading advertisers...</string>
+    <string name="error_first_name">First name required.</string>
+    <string name="error_last_name">Last name required.</string>
+    <string name="firstname_edittext_hint">First Name</string>
+    <string name="lastname_edittext_hint">Last Name</string>
+
+    <string name="existing_account_text_link">Already have an account?</string>
+    <string name="verification_code">Verification Code</string>
+
 </resources>
