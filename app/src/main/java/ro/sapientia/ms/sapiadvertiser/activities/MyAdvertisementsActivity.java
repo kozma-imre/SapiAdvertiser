@@ -1,3 +1,5 @@
+// if you put your Activities files to another folder than the default one. You need to import the
+// com.example.yourproject.R (this is your project R file NOT Android.R file) to ALL activities using R.
 package ro.sapientia.ms.sapiadvertiser.activities;
 
 import android.content.Intent;
@@ -11,8 +13,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ro.sapientia.ms.sapiadvertiser.R;
 
-// if you put your Activities files to another folder than the default one. You need to import the
-// com.example.yourproject.R (this is your project R file NOT Android.R file) to ALL activities using R.
 
 public class MyAdvertisementsActivity extends AppCompatActivity {
 
