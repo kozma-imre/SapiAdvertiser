@@ -32,6 +32,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -43,7 +44,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ro.sapientia.ms.sapiadvertiser.R;
+import ro.sapientia.ms.sapiadvertiser.models.Advertisement;
 import ro.sapientia.ms.sapiadvertiser.models.User;
+import ro.sapientia.ms.sapiadvertiser.models.UserPreview;
 import ro.sapientia.ms.sapiadvertiser.utils.Constants;
 import ro.sapientia.ms.sapiadvertiser.utils.GlideApp;
 
@@ -78,14 +81,18 @@ public class ProfileActivity extends AppCompatActivity {
     @BindView(R.id.my_list_btn)
     Button mListAdv;
     private Uri mainImageURI = null;
-    // Firebase autintificate ...
+    // Firebase autentificate ...
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mUsersRef;
+    private DatabaseReference mAdvertisementsRef;
     private StorageReference storageReference;
     // User class
     private String mUserId;
     private User mUser = new User();
+    private UserPreview mUserPreview = new UserPreview();
+
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -118,6 +125,7 @@ public class ProfileActivity extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
         mUserId = mAuth.getCurrentUser().getUid();
         mUsersRef = mFirebaseDatabase.getReference().child(Constants.USERS_CHILD);
+        mAdvertisementsRef = mFirebaseDatabase.getReference().child(Constants.ADVERTISEMENTS_CHILD);
 
         ButterKnife.bind(ProfileActivity.this);
 
@@ -163,7 +171,37 @@ public class ProfileActivity extends AppCompatActivity {
         if (validateSignUpData()) {
 
             saveUser();
+            updateAdvertisments();
         }
+
+    }
+
+    private void updateAdvertisments() {
+
+
+        Query recentList = mAdvertisementsRef.orderByChild("creator_user/id").equalTo(mUserId);
+
+
+        recentList.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot advertisementSnapshot : dataSnapshot.getChildren()) {
+
+                    Advertisement adv = advertisementSnapshot.getValue(Advertisement.class);
+                    adv.CreatorUser.Name = mUser.FirstName + " " + mUser.LastName;
+                    adv.CreatorUser.ImageUrl = mUser.ImageUrl;
+
+                    mAdvertisementsRef.child(advertisementSnapshot.getKey())
+                            .setValue(adv);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        });
 
     }
 
@@ -185,6 +223,7 @@ public class ProfileActivity extends AppCompatActivity {
                                     mainImageURI = null;
                                     mUser.ImageUrl = uri.toString();
                                     mUsersRef.child(mUser.Id).setValue(mUser);
+                                    
                                     Toast.makeText(ProfileActivity.this, "The data is saved", Toast.LENGTH_LONG).show();
                                     setupProgress.setVisibility(View.INVISIBLE);
                                 }
