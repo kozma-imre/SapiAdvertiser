@@ -9,10 +9,6 @@ public class Advertisement {
 
     @PropertyName("image_urls")
     public ArrayList<String> ImageUrls;
-
-    public Advertisement() {
-
-    }
     //using property name for mapping class properties with firebase fields,
     // if i dont use property names firebase will use my class fields name and i don`t want to use in firebase PascalCase
     @PropertyName("title") // firebase field name (snake_case)
@@ -29,18 +25,6 @@ public class Advertisement {
 
     @PropertyName("location")
     public String Location;
-
-    public Advertisement(String title, String shortDescription, String longDescription, String phoneNumber, String location, ArrayList<String>
-            imageUrls, int numberOfViews) {
-        Title = title;
-        ShortDescription = shortDescription;
-        LongDescription = longDescription;
-        PhoneNumber = phoneNumber;
-        Location = location;
-        ImageUrls = imageUrls;
-        NumberOfViews = numberOfViews;
-
-    }
 
     @PropertyName("nr_views")
     public int NumberOfViews;
@@ -61,5 +45,27 @@ public class Advertisement {
 
     @PropertyName("id")
     public String Id;
+
+
+    public Advertisement() {
+    }
+
+    public Advertisement(ArrayList<String> imageUrls, String title, String shortDescription, String longDescription, String phoneNumber, String location, int numberOfViews, boolean isDeleted, boolean isReported, Date createdTime, UserPreview creatorUser, String id) {
+        ImageUrls = imageUrls;
+        Title = title;
+        ShortDescription = shortDescription;
+        LongDescription = longDescription;
+        PhoneNumber = phoneNumber;
+        Location = location;
+        NumberOfViews = numberOfViews;
+        IsDeleted = isDeleted;
+        IsReported = isReported;
+        CreatedTime = createdTime;
+        CreatorUser = creatorUser;
+        Id = id;
+    }
+
+
+
 
 }

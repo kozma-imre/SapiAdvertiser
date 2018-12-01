@@ -40,6 +40,8 @@ import com.google.firebase.storage.UploadTask;
 
 import net.rimoto.intlphoneinput.IntlPhoneInput;
 
+import java.util.UUID;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -171,7 +173,8 @@ public class ProfileActivity extends AppCompatActivity {
         if (validateSignUpData()) {
 
             saveUser();
-            updateAdvertisments();
+
+
         }
 
     }
@@ -209,7 +212,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         if (mainImageURI != null) {
             // Function upload image
-            final StorageReference image_path = storageReference.child("ProfilePictures").child(mUserId + "." + getFileExtension(mainImageURI));
+
+            String uniqueID = UUID.randomUUID().toString();
+            final StorageReference image_path = storageReference.child("ProfilePictures").child(uniqueID + "." + getFileExtension(mainImageURI));
 
             image_path.putFile(mainImageURI)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -226,6 +231,7 @@ public class ProfileActivity extends AppCompatActivity {
                                     
                                     Toast.makeText(ProfileActivity.this, "The data is saved", Toast.LENGTH_LONG).show();
                                     setupProgress.setVisibility(View.INVISIBLE);
+                                    updateAdvertisments();
                                 }
                             });
                         }
@@ -239,7 +245,9 @@ public class ProfileActivity extends AppCompatActivity {
             mUsersRef.child(mUser.Id).setValue(mUser);
             Toast.makeText(ProfileActivity.this, "The data is saved", Toast.LENGTH_LONG).show();
             setupProgress.setVisibility(View.INVISIBLE);
+            updateAdvertisments();
         }
+
     }
 
     @OnClick(R.id.profile_image)
