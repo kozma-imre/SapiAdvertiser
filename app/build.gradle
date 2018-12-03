@@ -32,6 +32,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     testImplementation 'junit:junit:4.12'
     //github
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     //firebase, make sure the version is the same.
@@ -39,6 +41,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:16.0.4'
     implementation 'com.google.firebase:firebase-auth:16.0.4'
     implementation 'com.google.firebase:firebase-storage:16.0.4'
+    implementation 'com.firebaseui:firebase-ui-database:0.4.0'
     //butterknife
     implementation 'com.jakewharton:butterknife:9.0.0-rc1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc1'
@@ -46,6 +49,9 @@ dependencies {
     implementation 'net.rimoto:intlphoneinput:1.0.1'
     //google play services
     implementation "com.google.android.gms:play-services-auth:16.0.1"
+    //implementation "com.android.support:recyclerview-v7:28.0.0"
+
+
 
 }
 apply plugin: 'com.google.gms.google-services'
