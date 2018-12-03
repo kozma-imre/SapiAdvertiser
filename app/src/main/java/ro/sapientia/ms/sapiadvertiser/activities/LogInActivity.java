@@ -1,4 +1,6 @@
 package ro.sapientia.ms.sapiadvertiser.activities;
+// If you put your Activities files to another folder than the default one. You need to import the
+// com.example.your project.R (this is your project R file NOT Android.R file) to ALL activities using R.
 
 import android.content.Context;
 import android.content.Intent;
@@ -34,8 +36,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ro.sapientia.ms.sapiadvertiser.R;
 
-// If you put your Activities files to another folder than the default one. You need to import the
-// com.example.your project.R (this is your project R file NOT Android.R file) to ALL activities using R.
 
 public class LogInActivity extends AppCompatActivity {
 
@@ -49,6 +49,11 @@ public class LogInActivity extends AppCompatActivity {
     EditText verificationCode;
     @BindView(R.id.my_phone_input)
     IntlPhoneInput phoneInput;
+
+    private enum BtnType {
+        SIGNIN,
+        VERIFYCODE
+    }
 
     private FirebaseAuth mAuth;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
@@ -255,9 +260,5 @@ public class LogInActivity extends AppCompatActivity {
 
 
 
-    private enum BtnType {
-        SIGNIN,
-        VERIFYCODE
-    }
 
 }
