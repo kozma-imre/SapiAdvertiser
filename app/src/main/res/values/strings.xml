@@ -41,5 +41,11 @@
         of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
         like Aldus PageMaker including versions of Lorem Ipsum
     </string>
+    <string name="advertisement_location">Location</string>
+    <string name="long_description">Long Description</string>
+    <string name="short_description">Short Description</string>
+    <string name="title">Title</string>
+    <string name="default_image_description">Default Image</string>
+    <string name="creator">Creator</string>
 
 </resources>

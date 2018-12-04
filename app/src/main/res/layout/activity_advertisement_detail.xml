@@ -28,14 +28,14 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="15dp"
-                    android:text="Title"
+                    android:text="@string/title"
                     android:textAlignment="viewStart"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
                     android:textStyle="bold" />
             </com.glide.slider.library.SliderLayout>
 
-            <TextView
+            <EditText
                 android:id="@+id/long_description_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
-                android:text="Location"
+                android:text="@string/advertisement_location"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView3"
@@ -84,6 +84,7 @@
                 android:id="@+id/share_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/default_image_description"
                 android:layout_marginStart="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -96,7 +97,7 @@
                 android:layout_marginStart="8dp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
-
+                android:contentDescription="@string/default_image_description"
                 app:layout_constraintStart_toEndOf="@+id/share_btn"
                 app:layout_constraintTop_toTopOf="@+id/share_btn"
                 app:layout_constraintVertical_bias="0.0"
@@ -108,6 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:visibility="visible"
+                android:contentDescription="@string/default_image_description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/delete_btn"
                 app:layout_constraintTop_toTopOf="@+id/delete_btn"
@@ -122,6 +124,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:visibility="visible"
+                android:contentDescription="@string/default_image_description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/location_text"
@@ -133,6 +136,7 @@
                 android:layout_width="43dp"
                 android:layout_height="35dp"
                 android:src="@drawable/default_image"
+                android:contentDescription="@string/default_image_description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/edit_btn"
                 app:layout_constraintTop_toTopOf="@+id/delete_btn" />
@@ -143,7 +147,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_marginEnd="8dp"
-                android:text="Creator"
+                android:text="@string/creator"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -156,6 +160,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:contentDescription="@string/default_image_description"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/long_description_text"
                 app:srcCompat="@drawable/baseline_phone_black_18" />
@@ -166,6 +171,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
+                android:contentDescription="@string/default_image_description"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView2"
                 app:srcCompat="@drawable/baseline_location_on_black_18" />
