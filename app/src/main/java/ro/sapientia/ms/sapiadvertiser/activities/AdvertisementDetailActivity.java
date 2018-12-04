@@ -36,6 +36,7 @@ import butterknife.OnClick;
 import ro.sapientia.ms.sapiadvertiser.R;
 import ro.sapientia.ms.sapiadvertiser.models.Advertisement;
 import ro.sapientia.ms.sapiadvertiser.utils.Constants;
+import ro.sapientia.ms.sapiadvertiser.utils.GlideApp;
 
 // if you put your Activities files to another folder than the default one. You need to import the
 // com.example.yourproject.R (this is your project R file NOT Android.R file) to ALL activities using R.
@@ -179,6 +180,14 @@ public class AdvertisementDetailActivity extends AppCompatActivity implements Ba
                         profileImage.setVisibility(View.VISIBLE);
                         userName.setVisibility(View.VISIBLE);
 
+                        GlideApp.with(AdvertisementDetailActivity.this)
+                                .load(adv.CreatorUser.ImageUrl)
+                                .error(R.drawable.default_image)
+                                .override(300, 300)
+                                .apply(RequestOptions.circleCropTransform())
+                                .into(profileImage);
+
+                        userName.setText(adv.CreatorUser.Name);
 
                     }
 
@@ -246,7 +255,7 @@ public class AdvertisementDetailActivity extends AppCompatActivity implements Ba
     public void shareAdvertisement() {
 
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-        sharingIntent.setType("image/*,text/plain");
+        sharingIntent.setType("text/plain");
 
         sharingIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, adv.Title);
@@ -254,6 +263,13 @@ public class AdvertisementDetailActivity extends AppCompatActivity implements Ba
 
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
 
+    }
+
+    @OnClick(R.id.report_btn)
+    public void reportAdvertisement() {
+
+        adv.IsReported = true;
+        mAdvertisementsRef.child(adv.Id).setValue(adv);
 
     }
 
