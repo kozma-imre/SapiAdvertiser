@@ -1,3 +1,45 @@
 <resources>
     <string name="app_name">SapiAdvertiser</string>
+
+    <string name="title_activity_advertisement_list">AdvertisementListActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_save">Save</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_my_advertisements">MyAdvertisementsActivity</string>
+    <string name="phonenumber_edittext_hint">Phone Number</string>
+    <string name="login_btn_text">Login</string>
+    <string name="new_account_text_link">Need a new account?</string>
+    <string name="signup_btn_text">SignUp</string>
+    <string name="title_new_blog">New Advertisement</string>
+    <string name="signout_btn">SignOut</string>
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="invalid_phone_number">Invalid phone number. Try again.</string>
+    <string name="invalid_credential">Invalid Credential.</string>
+    <string name="too_many_requests">Too many requests.</string>
+    <string name="verify_code">Verify code.</string>
+    <string name="loading_advertisers">Loading advertisers...</string>
+    <string name="error_first_name">First name required.</string>
+    <string name="error_last_name">Last name required.</string>
+    <string name="firstname_edittext_hint">First Name</string>
+    <string name="lastname_edittext_hint">Last Name</string>
+    <string name="permission_denied">Permission Denied</string>
+    <string name="permission_granted">You already have permission </string>
+    <string name="existing_account_text_link">Already have an account?</string>
+    <string name="verification_code">Verification Code</string>
+    <string name="email_edit_text">Email</string>
+    <string name="address_edit_text">Address</string>
+    <string name="save_account_settings_btn">Save Account Settings</string>
+    <string name="empty_phone_number">Please enter a phone number.</string>
+    <string name="no_internet_connection">No internet connection. Please try again later.</string>
+    <string name="default_long_description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley
+        of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
+        into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release
+        of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+        like Aldus PageMaker including versions of Lorem Ipsum
+    </string>
+
 </resources>

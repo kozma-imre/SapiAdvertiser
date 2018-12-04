@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_new_blog"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/title_new_blog" />
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@android:drawable/ic_menu_my_calendar"
+        android:title="@string/title_profile" />
+
+
+</menu>
