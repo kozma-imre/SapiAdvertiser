@@ -3,7 +3,175 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activities.AdvertisementDetailActivity">
+    android:layout_height="match_parent">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".activities.AdvertisementDetailActivity">
+
+            <com.glide.slider.library.SliderLayout
+                android:id="@+id/slider"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <TextView
+                    android:id="@+id/title_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Title"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+            </com.glide.slider.library.SliderLayout>
+
+            <TextView
+                android:id="@+id/long_description_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="fill_vertical"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:ems="10"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:inputType="textMultiLine"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/slider" />
+
+            <TextView
+                android:id="@+id/phone_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintTop_toBottomOf="@+id/long_description_text" />
+
+            <TextView
+                android:id="@+id/location_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
+                android:text="Location"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/phone_text" />
+
+            <ImageButton
+                android:id="@+id/share_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/baseline_share_black_18" />
+
+            <ImageButton
+                android:id="@+id/delete_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                app:layout_constraintStart_toEndOf="@+id/share_btn"
+                app:layout_constraintTop_toTopOf="@+id/share_btn"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/baseline_delete_black_18" />
+
+            <ImageButton
+                android:id="@+id/edit_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/delete_btn"
+                app:layout_constraintTop_toTopOf="@+id/delete_btn"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/baseline_edit_black_18" />
+
+
+            <ImageButton
+                android:id="@+id/report_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/location_text"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/baseline_report_black_18" />
+
+            <ImageView
+                android:id="@+id/profile_image_view"
+                android:layout_width="43dp"
+                android:layout_height="35dp"
+                android:src="@drawable/default_image"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/edit_btn"
+                app:layout_constraintTop_toTopOf="@+id/delete_btn" />
+
+            <TextView
+                android:id="@+id/user_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginEnd="8dp"
+                android:text="Creator"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/profile_image_view"
+                app:layout_constraintTop_toTopOf="@+id/profile_image_view" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/long_description_text"
+                app:srcCompat="@drawable/baseline_phone_black_18" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                app:srcCompat="@drawable/baseline_location_on_black_18" />
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>
