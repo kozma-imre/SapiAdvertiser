@@ -35,7 +35,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ro.sapientia.ms.sapiadvertiser.R;
 import ro.sapientia.ms.sapiadvertiser.models.Advertisement;
-import ro.sapientia.ms.sapiadvertiser.models.UserPreview;
 import ro.sapientia.ms.sapiadvertiser.utils.Constants;
 
 // if you put your Activities files to another folder than the default one. You need to import the
@@ -65,6 +64,8 @@ public class AdvertisementDetailActivity extends AppCompatActivity implements Ba
     ImageView profileImage;
     @BindView(R.id.user_text)
     TextView userName;
+    @BindView(R.id.long_description_text)
+    TextView mLongDescription;
 
     private DatabaseReference mAdvertisementsRef;
     private StorageReference storageReference;
@@ -72,11 +73,9 @@ public class AdvertisementDetailActivity extends AppCompatActivity implements Ba
     private FirebaseAuth mAuth;
 
     private List<Advertisement> advList;
-    private UserPreview userPreview;
     private String id;
     private Advertisement adv;
     private String mUserId;
-
 
 
     @Override
@@ -88,7 +87,7 @@ public class AdvertisementDetailActivity extends AppCompatActivity implements Ba
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             id = extras.getString("Id");
-            Toast.makeText(AdvertisementDetailActivity.this, "az id :" + id, Toast.LENGTH_SHORT).show();
+
         }
         // and now we can retrieve the data from the database where the id is this what we got from the intent
 
@@ -163,6 +162,7 @@ public class AdvertisementDetailActivity extends AppCompatActivity implements Ba
                     phoneInput.setText(adv.PhoneNumber);
                     mTitle.setText(adv.Title);
                     mLocation.setText(adv.Location);
+                    mLongDescription.setText(adv.LongDescription);
                     if (adv.CreatorUser.Id.equals(mUserId)) {
 
                         deleteBtn.setVisibility(View.VISIBLE);
@@ -178,6 +178,7 @@ public class AdvertisementDetailActivity extends AppCompatActivity implements Ba
                         reportBtn.setVisibility(View.VISIBLE);
                         profileImage.setVisibility(View.VISIBLE);
                         userName.setVisibility(View.VISIBLE);
+
 
                     }
 
@@ -238,6 +239,21 @@ public class AdvertisementDetailActivity extends AppCompatActivity implements Ba
         Intent editIntent = new Intent(AdvertisementDetailActivity.this, AddAdvertisementActivity.class);
         startActivity(editIntent);
         finish();
+
+    }
+
+    @OnClick(R.id.share_btn)
+    public void shareAdvertisement() {
+
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("image/*,text/plain");
+
+        sharingIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, adv.Title);
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, adv.LongDescription);
+
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+
 
     }
 
