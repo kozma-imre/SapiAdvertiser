@@ -27,8 +27,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import net.rimoto.intlphoneinput.IntlPhoneInput;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,8 +47,8 @@ public class AdvertisementDetailActivity extends AppCompatActivity implements Ba
 
     @BindView(R.id.slider)
     SliderLayout mDemoSlider;
-    @BindView(R.id.phone_input)
-    IntlPhoneInput phoneInput;
+    @BindView(R.id.phone_text)
+    TextView phoneInput;
     @BindView(R.id.title_text)
     TextView mTitle;
     @BindView(R.id.location_text)
@@ -162,7 +160,7 @@ public class AdvertisementDetailActivity extends AppCompatActivity implements Ba
                     mDemoSlider.setDuration(4000);
                     mDemoSlider.addOnPageChangeListener(AdvertisementDetailActivity.this);
 
-                    phoneInput.setNumber(adv.PhoneNumber);
+                    phoneInput.setText(adv.PhoneNumber);
                     mTitle.setText(adv.Title);
                     mLocation.setText(adv.Location);
                     if (adv.CreatorUser.Id.equals(mUserId)) {
@@ -232,6 +230,15 @@ public class AdvertisementDetailActivity extends AppCompatActivity implements Ba
         Intent mainIntent = new Intent(AdvertisementDetailActivity.this, AdvertisementListActivity.class);
         startActivity(mainIntent);
         finish();
+    }
+
+    @OnClick(R.id.edit_btn)
+    public void editAdvertisement() {
+
+        Intent editIntent = new Intent(AdvertisementDetailActivity.this, AddAdvertisementActivity.class);
+        startActivity(editIntent);
+        finish();
+
     }
 
 
