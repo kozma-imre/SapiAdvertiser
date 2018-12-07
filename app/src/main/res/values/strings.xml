@@ -47,5 +47,6 @@
     <string name="title">Title</string>
     <string name="default_image_description">Default Image</string>
     <string name="creator">Creator</string>
+    <string name="add_advertisement">Post</string>
 
 </resources>
