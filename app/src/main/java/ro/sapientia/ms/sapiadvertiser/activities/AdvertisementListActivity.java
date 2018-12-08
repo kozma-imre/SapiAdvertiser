@@ -55,7 +55,9 @@ public class AdvertisementListActivity extends AppCompatActivity {
 
                     break;
                 case R.id.navigation_new_blog:
-
+                    Intent addAdvertisementIntent = new Intent(AdvertisementListActivity.this, AddAdvertisementActivity.class);
+                    startActivity(addAdvertisementIntent);
+                    finish();
                     break;
             }
             return false;

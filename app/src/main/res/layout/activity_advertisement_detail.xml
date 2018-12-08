@@ -7,12 +7,23 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="80dp">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
             tools:context=".activities.AdvertisementDetailActivity">
 
             <com.glide.slider.library.SliderLayout
@@ -28,14 +39,14 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="15dp"
-                    android:text="Title"
+                    android:text="@string/title"
                     android:textAlignment="viewStart"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
                     android:textStyle="bold" />
             </com.glide.slider.library.SliderLayout>
 
-            <TextView
+            <EditText
                 android:id="@+id/long_description_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,7 +85,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
-                android:text="Location"
+                android:text="@string/advertisement_location"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView3"
@@ -83,10 +94,13 @@
             <ImageButton
                 android:id="@+id/share_btn"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:contentDescription="@string/default_image_description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3"
                 app:srcCompat="@drawable/baseline_share_black_18" />
 
             <ImageButton
@@ -94,9 +108,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:contentDescription="@string/default_image_description"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
-
                 app:layout_constraintStart_toEndOf="@+id/share_btn"
                 app:layout_constraintTop_toTopOf="@+id/share_btn"
                 app:layout_constraintVertical_bias="0.0"
@@ -107,6 +121,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:contentDescription="@string/default_image_description"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/delete_btn"
@@ -121,6 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
+                android:contentDescription="@string/default_image_description"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -132,6 +148,7 @@
                 android:id="@+id/profile_image_view"
                 android:layout_width="43dp"
                 android:layout_height="35dp"
+                android:contentDescription="@string/default_image_description"
                 android:src="@drawable/default_image"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/edit_btn"
@@ -143,7 +160,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_marginEnd="8dp"
-                android:text="Creator"
+                android:text="@string/creator"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -156,6 +173,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:contentDescription="@string/default_image_description"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/long_description_text"
                 app:srcCompat="@drawable/baseline_phone_black_18" />
@@ -166,6 +184,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
+                android:contentDescription="@string/default_image_description"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView2"
                 app:srcCompat="@drawable/baseline_location_on_black_18" />
