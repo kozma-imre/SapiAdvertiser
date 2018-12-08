@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,8 +25,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,10 +65,10 @@ public class AdvertisementDetailActivity extends AppCompatActivity implements Ba
     @BindView(R.id.user_text)
     TextView userName;
     @BindView(R.id.long_description_text)
-    TextView mLongDescription;
+    EditText mLongDescription;
 
     private DatabaseReference mAdvertisementsRef;
-    private StorageReference storageReference;
+
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mAuth;
 
@@ -99,7 +98,7 @@ public class AdvertisementDetailActivity extends AppCompatActivity implements Ba
         mAuth = FirebaseAuth.getInstance();
         mUserId = mAuth.getCurrentUser().getUid();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        storageReference = FirebaseStorage.getInstance().getReference();
+
         mAdvertisementsRef = mFirebaseDatabase.getReference().child(Constants.ADVERTISEMENTS_CHILD);
 
         advList = new ArrayList<>();
@@ -145,7 +144,7 @@ public class AdvertisementDetailActivity extends AppCompatActivity implements Ba
                                 .setProgressBarVisible(true)
                                 .setOnSliderClickListener(AdvertisementDetailActivity.this);
 
-                        //add your extra information
+                        // add your extra information
                         sliderView.bundle(new Bundle());
                         sliderView.getBundle().putString("extra", adv.Title);
                         mDemoSlider.addSlider(sliderView);
@@ -245,9 +244,11 @@ public class AdvertisementDetailActivity extends AppCompatActivity implements Ba
     @OnClick(R.id.edit_btn)
     public void editAdvertisement() {
 
-        Intent editIntent = new Intent(AdvertisementDetailActivity.this, AddAdvertisementActivity.class);
+        // we do nothing
+        /*Intent editIntent = new Intent(AdvertisementDetailActivity.this, AddAdvertisementActivity.class);
         startActivity(editIntent);
-        finish();
+        finish();*/
+        return;
 
     }
 
