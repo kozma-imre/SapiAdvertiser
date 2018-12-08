@@ -48,5 +48,12 @@
     <string name="default_image_description">Default Image</string>
     <string name="creator">Creator</string>
     <string name="add_advertisement">Post</string>
+    <string name="error_title">Title Required</string>
+    <string name="error_short_description">Short description required</string>
+    <string name="error_long_description">Long description required</string>
+    <string name="error_location">Location required</string>
+    <string name="advertisement_pictures_location">AdvertisementPictures</string>
+    <string name="succes_upload_image">The image is uploaded</string>
+    <string name="saved_data">The data is saved</string>
 
 </resources>

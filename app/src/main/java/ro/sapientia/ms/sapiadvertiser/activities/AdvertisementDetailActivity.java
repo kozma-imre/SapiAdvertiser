@@ -144,7 +144,7 @@ public class AdvertisementDetailActivity extends AppCompatActivity implements Ba
                                 .setProgressBarVisible(true)
                                 .setOnSliderClickListener(AdvertisementDetailActivity.this);
 
-                        //add your extra information
+                        // add your extra information
                         sliderView.bundle(new Bundle());
                         sliderView.getBundle().putString("extra", adv.Title);
                         mDemoSlider.addSlider(sliderView);
@@ -244,9 +244,11 @@ public class AdvertisementDetailActivity extends AppCompatActivity implements Ba
     @OnClick(R.id.edit_btn)
     public void editAdvertisement() {
 
-        Intent editIntent = new Intent(AdvertisementDetailActivity.this, AddAdvertisementActivity.class);
+        // we do nothing
+        /*Intent editIntent = new Intent(AdvertisementDetailActivity.this, AddAdvertisementActivity.class);
         startActivity(editIntent);
-        finish();
+        finish();*/
+        return;
 
     }
 

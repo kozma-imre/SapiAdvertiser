@@ -6,15 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".activities.AddAdvertisementActivity">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/progressBar">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -55,11 +67,11 @@
                 android:scrollbars="horizontal"
                 app:layout_constraintBottom_toTopOf="@+id/save_btn"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageButton2"
-                app:layout_constraintTop_toTopOf="@+id/imageButton2" />
+                app:layout_constraintStart_toEndOf="@+id/add_image_btn"
+                app:layout_constraintTop_toTopOf="@+id/add_image_btn" />
 
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/add_image_btn"
                 android:layout_width="91dp"
                 android:layout_height="92dp"
                 android:layout_marginStart="8dp"
