@@ -78,6 +78,7 @@ public class AdvertisementListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG,"Begin: onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advertisement_list);
 
@@ -122,7 +123,7 @@ public class AdvertisementListActivity extends AppCompatActivity {
 
             }
         });
-
+        Log.d(TAG,"End: onCreate()");
     }
 
 
@@ -149,18 +150,21 @@ public class AdvertisementListActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        Log.d(TAG,"Begin: onStart()");
+        super.onResume();
         FirebaseRecyclerAdapter<Advertisement,ViewHolder>  firebaseRecyclerAdapter=
                 new FirebaseRecyclerAdapter<Advertisement, ViewHolder>(Advertisement.class,R.layout.row,ViewHolder.class,mUsersRefAdv) {
                     @Override
                     protected void populateViewHolder(ViewHolder viewHolder, Advertisement model, int position) {
+                        Log.d(TAG,"Begin: populateViewHolder()");
                         viewHolder.setDetails(getApplicationContext(),model.getTitle(),model.getShortDescription(),model.getImageUrls().get(0) );
 
-                     
+                        Log.d(TAG,"End: populateViewHolder()");
                     }
                 };
         mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+        Log.d(TAG,"End: onStart()");
     }
 
 

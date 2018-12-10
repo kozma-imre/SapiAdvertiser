@@ -53,7 +53,7 @@ public class AdvertisementsRecyclerAdapter extends RecyclerView.Adapter<Advertis
         final Advertisement advertisement = advList.get(i);
         GlideApp.with(mCtx)
                 .load(advertisement.ImageUrls.get(0))
-                .error(R.drawable.default_image2)
+                .error(R.drawable.loading)
                 .override(300, 300)
                 .into(viewHolder.pictureView);
 

@@ -10,6 +10,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,8 +38,7 @@ public class MyAdvertisementsActivity extends AppCompatActivity {
 
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
-    @BindView(R.id.advert_list_view)
-    RecyclerView advertListView;
+    @BindView(R.id.advert_list_view) RecyclerView advertListView;
 
     private List<Advertisement> advList;
     private String mUserId;
@@ -51,6 +51,7 @@ public class MyAdvertisementsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG,"Begin: onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_advertisements);
 
@@ -66,6 +67,7 @@ public class MyAdvertisementsActivity extends AppCompatActivity {
         mUserId = mAuth.getCurrentUser().getUid();
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        Log.d(TAG,"End: onCreate()");
     }
 
     @Override
