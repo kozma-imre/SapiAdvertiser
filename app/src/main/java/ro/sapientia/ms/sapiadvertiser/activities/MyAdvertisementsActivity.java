@@ -90,11 +90,13 @@ public class MyAdvertisementsActivity extends AppCompatActivity {
                 for (DataSnapshot advertisementSnapshot : dataSnapshot.getChildren()) {
 
                     Advertisement adv = advertisementSnapshot.getValue(Advertisement.class);
-                    advList.add(adv);
-
+                    if (adv.IsDeleted == false) {
+                        advList.add(adv);
+                    }
                     advertisementsRecyclerAdapter = new AdvertisementsRecyclerAdapter(advList, MyAdvertisementsActivity.this);
                     advertListView.setAdapter(advertisementsRecyclerAdapter);
                     advertisementsRecyclerAdapter.notifyDataSetChanged();
+
 
                 }
             }

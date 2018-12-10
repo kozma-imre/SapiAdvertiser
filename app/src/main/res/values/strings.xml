@@ -34,5 +34,26 @@
     <string name="save_account_settings_btn">Save Account Settings</string>
     <string name="empty_phone_number">Please enter a phone number.</string>
     <string name="no_internet_connection">No internet connection. Please try again later.</string>
+    <string name="default_long_description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley
+        of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
+        into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release
+        of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+        like Aldus PageMaker including versions of Lorem Ipsum
+    </string>
+    <string name="advertisement_location">Location</string>
+    <string name="long_description">Long Description</string>
+    <string name="short_description">Short Description</string>
+    <string name="title">Title</string>
+    <string name="default_image_description">Default Image</string>
+    <string name="creator">Creator</string>
+    <string name="add_advertisement">Post</string>
+    <string name="error_title">Title Required</string>
+    <string name="error_short_description">Short description required</string>
+    <string name="error_long_description">Long description required</string>
+    <string name="error_location">Location required</string>
+    <string name="advertisement_pictures_location">AdvertisementPictures</string>
+    <string name="succes_upload_image">The image is uploaded</string>
+    <string name="saved_data">The data is saved</string>
 
 </resources>

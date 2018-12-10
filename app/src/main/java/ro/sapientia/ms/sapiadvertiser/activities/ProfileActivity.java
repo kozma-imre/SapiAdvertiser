@@ -48,7 +48,6 @@ import butterknife.OnClick;
 import ro.sapientia.ms.sapiadvertiser.R;
 import ro.sapientia.ms.sapiadvertiser.models.Advertisement;
 import ro.sapientia.ms.sapiadvertiser.models.User;
-import ro.sapientia.ms.sapiadvertiser.models.UserPreview;
 import ro.sapientia.ms.sapiadvertiser.utils.Constants;
 import ro.sapientia.ms.sapiadvertiser.utils.GlideApp;
 
@@ -92,7 +91,7 @@ public class ProfileActivity extends AppCompatActivity {
     // User class
     private String mUserId;
     private User mUser = new User();
-    private UserPreview mUserPreview = new UserPreview();
+
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -193,6 +192,7 @@ public class ProfileActivity extends AppCompatActivity {
                     Advertisement adv = advertisementSnapshot.getValue(Advertisement.class);
                     adv.CreatorUser.Name = mUser.FirstName + " " + mUser.LastName;
                     adv.CreatorUser.ImageUrl = mUser.ImageUrl;
+                    adv.PhoneNumber = mUser.PhoneNumber;
 
                     mAdvertisementsRef.child(advertisementSnapshot.getKey())
                             .setValue(adv);
@@ -225,6 +225,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     Log.d(TAG, "onSucces =" + uri.toString());
+
                                     mainImageURI = null;
                                     mUser.ImageUrl = uri.toString();
                                     mUsersRef.child(mUser.Id).setValue(mUser);
