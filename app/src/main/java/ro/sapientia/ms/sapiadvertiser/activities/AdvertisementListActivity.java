@@ -152,11 +152,11 @@ public class AdvertisementListActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onResume() {
+    protected void onStart() {
         Log.d(TAG,"Begin: onStart()");
-        super.onResume();
+        super.onStart();
         FirebaseRecyclerAdapter<Advertisement,ViewHolder>  firebaseRecyclerAdapter=
-                new FirebaseRecyclerAdapter<Advertisement, ViewHolder>(Advertisement.class,R.layout.row,ViewHolder.class,mUsersRefAdv) {
+                new FirebaseRecyclerAdapter<Advertisement, ViewHolder>(Advertisement.class,R.layout.advertisements_list_item,ViewHolder.class,mUsersRefAdv) {
                     @Override
                     protected void populateViewHolder(ViewHolder viewHolder, Advertisement model, int position) {
                         Log.d(TAG,"Begin: populateViewHolder()");
