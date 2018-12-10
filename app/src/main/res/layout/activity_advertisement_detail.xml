@@ -101,7 +101,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView3"
-                app:srcCompat="@drawable/loading" />
+                app:srcCompat="@drawable/baseline_share_black_18" />
 
             <ImageButton
                 android:id="@+id/delete_btn"
@@ -114,7 +114,7 @@
                 app:layout_constraintStart_toEndOf="@+id/share_btn"
                 app:layout_constraintTop_toTopOf="@+id/share_btn"
                 app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/loading" />
+                app:srcCompat="@drawable/baseline_delete_black_18" />
 
             <ImageButton
                 android:id="@+id/edit_btn"
@@ -127,7 +127,7 @@
                 app:layout_constraintStart_toEndOf="@+id/delete_btn"
                 app:layout_constraintTop_toTopOf="@+id/delete_btn"
                 app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/loading" />
+                app:srcCompat="@drawable/baseline_edit_black_18" />
 
 
             <ImageButton
@@ -142,7 +142,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/location_text"
                 app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/loading" />
+                app:srcCompat="@drawable/baseline_report_black_18" />
 
             <ImageView
                 android:id="@+id/profile_image_view"
@@ -176,7 +176,7 @@
                 android:contentDescription="@string/default_image_description"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/long_description_text"
-                app:srcCompat="@drawable/loading" />
+                app:srcCompat="@drawable/baseline_phone_black_18" />
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -187,7 +187,7 @@
                 android:contentDescription="@string/default_image_description"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView2"
-                app:srcCompat="@drawable/loading" />
+                app:srcCompat="@drawable/baseline_location_on_black_18" />
 
         </android.support.constraint.ConstraintLayout>
 

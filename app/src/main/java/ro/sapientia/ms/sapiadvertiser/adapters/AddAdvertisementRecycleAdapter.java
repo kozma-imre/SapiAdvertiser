@@ -45,7 +45,7 @@ public class AddAdvertisementRecycleAdapter extends RecyclerView.Adapter<AddAdve
 
         GlideApp.with(mCtx)
                 .load(mainImageUri)
-                .error(R.drawable.loading)
+                .error(R.drawable.default_image2)
                 .into(viewHolder.pictureView);
     }
 

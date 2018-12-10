@@ -80,7 +80,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/save_btn"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/location_text"
-                app:srcCompat="@drawable/loading" />
+                app:srcCompat="@drawable/baseline_add_photo_alternate_black_48" />
 
             <EditText
                 android:id="@+id/title_text"
