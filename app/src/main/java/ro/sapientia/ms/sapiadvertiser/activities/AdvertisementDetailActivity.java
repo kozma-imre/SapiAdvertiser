@@ -236,9 +236,9 @@ public class AdvertisementDetailActivity extends AppCompatActivity implements Ba
         adv.IsDeleted = true;
         mAdvertisementsRef.child(adv.Id).setValue(adv);
 
-        Intent mainIntent = new Intent(AdvertisementDetailActivity.this, AdvertisementListActivity.class);
+        /*Intent mainIntent = new Intent(AdvertisementDetailActivity.this, AdvertisementListActivity.class);
         startActivity(mainIntent);
-        finish();
+        finish();*/
     }
 
     @OnClick(R.id.edit_btn)

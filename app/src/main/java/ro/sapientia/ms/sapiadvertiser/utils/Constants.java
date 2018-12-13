@@ -6,5 +6,6 @@ public final class Constants {
     public static final String ADVERTISEMENTS_CHILD = "advertisements";
     public static final String ADVERTISEMENT_CREATOR_CHILD = "creator_user";
     public static final String ADVERTISEMENT_IMAGES = "AdvertisementPictures";
+    public static final String ADVERTISEMENT_VIEWS = "numberOfViews";
 
 }

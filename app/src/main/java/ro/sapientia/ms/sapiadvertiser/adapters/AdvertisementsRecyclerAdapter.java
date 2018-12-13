@@ -13,12 +13,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
 import ro.sapientia.ms.sapiadvertiser.R;
 import ro.sapientia.ms.sapiadvertiser.activities.AdvertisementDetailActivity;
 import ro.sapientia.ms.sapiadvertiser.models.Advertisement;
+import ro.sapientia.ms.sapiadvertiser.utils.Constants;
 import ro.sapientia.ms.sapiadvertiser.utils.GlideApp;
 
 public class AdvertisementsRecyclerAdapter extends RecyclerView.Adapter<AdvertisementsRecyclerAdapter.ViewHolder> {
@@ -50,6 +52,7 @@ public class AdvertisementsRecyclerAdapter extends RecyclerView.Adapter<Advertis
 
         Log.d(TAG, "onBINDHOLDER : called");
 
+
         final Advertisement advertisement = advList.get(i);
         GlideApp.with(mCtx)
                 .load(advertisement.ImageUrls.get(0))
@@ -71,8 +74,12 @@ public class AdvertisementsRecyclerAdapter extends RecyclerView.Adapter<Advertis
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                int currentNumber = Integer.parseInt( viewHolder.numberOfViews.getText().toString() );
                 mId = advertisement.Id;
+                //String currentAdvId = advList.get(0).Id;
+                FirebaseDatabase.getInstance().getReference().child(Constants.ADVERTISEMENTS_CHILD).child(mId).child(Constants.ADVERTISEMENT_VIEWS).setValue( currentNumber+1 );
+
+
                 Intent detailAdvertisementIntent = new Intent(mCtx, AdvertisementDetailActivity.class);
                 detailAdvertisementIntent.putExtra("Id", mId);
                 mCtx.startActivity(detailAdvertisementIntent);

@@ -4,30 +4,33 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ro.sapientia.ms.sapiadvertiser.R;
+
+import ro.sapientia.ms.sapiadvertiser.adapters.AdvertisementsRecyclerAdapter;
 import ro.sapientia.ms.sapiadvertiser.models.Advertisement;
 import ro.sapientia.ms.sapiadvertiser.utils.Constants;
-import ro.sapientia.ms.sapiadvertiser.utils.ViewHolder;
 
 
 // if you put your Activities files to another folder than the default one. You need to import the
@@ -41,15 +44,93 @@ public class AdvertisementListActivity extends AppCompatActivity {
     @BindView(R.id.signout_btn)
     Button signoutButton;
     @BindView(R.id.navigation)
-    BottomNavigationView mNavigation;
+    BottomNavigationView navigation;
+    @BindView(R.id.recyclerView)
+    RecyclerView advertListView;
+
+    //RecyclerView advertListView;
+
+    private List<Advertisement> advList;
+    private AdvertisementsRecyclerAdapter advertisementsRecyclerAdapter;
+
     private FirebaseAuth mAuth;
     private String mUserId;
-    private DatabaseReference mUsersRef;
-    private DatabaseReference mUsersRefAdv;
+    private DatabaseReference mAdvertisementsRef;
     private FirebaseDatabase mFirebaseDatabase;
-    RecyclerView mRecyclerView;
-   // final String blogPostId = blog_list.get(position).BlogPostId;
-    //final String currentUserId = FirebaseAuth.getCurrentUser().getUid();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_advertisement_list);
+        // advertListView = findViewById(R.id.advert_list_view);
+
+        ButterKnife.bind(AdvertisementListActivity.this);
+        advList = new ArrayList<>();
+        advertListView.setHasFixedSize(true);
+        advertListView.setLayoutManager(new LinearLayoutManager(this));
+
+        //mTextMessage = (TextView) findViewById(R.id.message);
+        //BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+
+
+        mAuth = FirebaseAuth.getInstance();
+        mUserId = mAuth.getCurrentUser().getUid();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+
+        mAdvertisementsRef = mFirebaseDatabase.getReference().child(Constants.ADVERTISEMENTS_CHILD);
+
+        //checkIfUserSignedup();
+
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        signoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+                Intent intent = new Intent(AdvertisementListActivity.this, LogInActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getAdvertisements();
+    }
+
+
+    public void getAdvertisements() {
+
+        Query recentList = mAdvertisementsRef.orderByChild("id");//.equalTo(mUserId);
+
+        recentList.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                advList.clear();
+                for (DataSnapshot advertisementSnapshot : dataSnapshot.getChildren()) {
+
+                    Advertisement adv = advertisementSnapshot.getValue(Advertisement.class);
+                    if (adv.IsDeleted == false) {
+                        advList.add(adv);
+                    }
+                    advertisementsRecyclerAdapter = new AdvertisementsRecyclerAdapter(advList, AdvertisementListActivity.this);
+                    advertListView.setAdapter(advertisementsRecyclerAdapter);
+                    advertisementsRecyclerAdapter.notifyDataSetChanged();
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -76,61 +157,11 @@ public class AdvertisementListActivity extends AppCompatActivity {
             return false;
         }
     };
+}
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG,"Begin: onCreate()");
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_advertisement_list);
-
-        ButterKnife.bind(AdvertisementListActivity.this);
-
-
-
-        //send Query to Firebase
-
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-
-       mUsersRefAdv = mFirebaseDatabase.getReference("advertisements");
-        mAuth = FirebaseAuth.getInstance();
-        mUserId = mAuth.getCurrentUser().getUid();
-       mUsersRef = mFirebaseDatabase.getReference().child(Constants.USERS_CHILD);
-
-        checkIfUserSignedup();
-
-        //Actionar
-        ActionBar actionBar = getSupportActionBar();
-        //set title
-        actionBar.setTitle("Posts  Lists");
-
-        //RecycleView
-
-        mRecyclerView = findViewById(R.id.recyclerView);
-        mRecyclerView.setHasFixedSize(true);
-
-        //set layout as LinearLayout
-
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-        mNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        signoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-                Intent intent = new Intent(AdvertisementListActivity.this, LogInActivity.class);
-                startActivity(intent);
-                finish();
-
-            }
-        });
-        Log.d(TAG,"End: onCreate()");
-    }
-
-
+/*
     private void checkIfUserSignedup() {
-        mUsersRef.addValueEventListener(new ValueEventListener() {
+        mAdvertisementsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // User allready saved in database
@@ -150,24 +181,5 @@ public class AdvertisementListActivity extends AppCompatActivity {
         });
     }
 
-
-    @Override
-    protected void onStart() {
-        Log.d(TAG,"Begin: onStart()");
-        super.onStart();
-        FirebaseRecyclerAdapter<Advertisement,ViewHolder>  firebaseRecyclerAdapter=
-                new FirebaseRecyclerAdapter<Advertisement, ViewHolder>(Advertisement.class,R.layout.advertisements_list_item,ViewHolder.class,mUsersRefAdv) {
-                    @Override
-                    protected void populateViewHolder(ViewHolder viewHolder, Advertisement model, int position) {
-                        Log.d(TAG,"Begin: populateViewHolder()");
-                        viewHolder.setDetails(getApplicationContext(),model.getTitle(),model.getShortDescription(),model.getImageUrls().get(0) );
-
-                        Log.d(TAG,"End: populateViewHolder()");
-                    }
-                };
-        mRecyclerView.setAdapter(firebaseRecyclerAdapter);
-        Log.d(TAG,"End: onStart()");
-    }
-
-
-}
+*/
+//}
