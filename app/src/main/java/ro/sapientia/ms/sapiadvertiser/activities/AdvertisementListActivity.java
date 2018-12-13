@@ -41,8 +41,7 @@ public class AdvertisementListActivity extends AppCompatActivity {
 
     private static final String TAG = "ADVLIST ACTIVITY";
 
-    @BindView(R.id.signout_btn)
-    Button signoutButton;
+
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
     @BindView(R.id.recyclerView)
@@ -83,16 +82,6 @@ public class AdvertisementListActivity extends AppCompatActivity {
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        signoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-                Intent intent = new Intent(AdvertisementListActivity.this, LogInActivity.class);
-                startActivity(intent);
-                finish();
-
-            }
-        });
     }
 
     @Override

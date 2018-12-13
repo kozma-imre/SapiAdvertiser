@@ -46,7 +46,7 @@ public class Advertisement {
     @PropertyName("id")
     public String Id;
 
-    public ArrayList<String> getImageUrls() {
+   /* public ArrayList<String> getImageUrls() {
         return ImageUrls;
     }
 
@@ -141,6 +141,7 @@ public class Advertisement {
     public void setId(String id) {
         Id = id;
     }
+    */
 
     public Advertisement() {
     }
