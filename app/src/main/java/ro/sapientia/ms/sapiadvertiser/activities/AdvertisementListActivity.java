@@ -44,6 +44,7 @@ public class AdvertisementListActivity extends AppCompatActivity {
     private DatabaseReference mUsersRef;
     private FirebaseDatabase mFirebaseDatabase;
 
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -79,7 +80,23 @@ public class AdvertisementListActivity extends AppCompatActivity {
         homeFragment = new HomeFragment();
         profileFragment = new ProfileFragment();
         addAdvertisementFragment = new AddAdvertisementFragment();
-        replaceFragment(homeFragment);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String myParam = extras.getString("edit");
+
+            Bundle bundle = new Bundle();
+            bundle.putString("AdvId", myParam);
+            addAdvertisementFragment.setArguments(bundle);
+            replaceFragment(addAdvertisementFragment);
+        } else {
+            replaceFragment(homeFragment);
+        }
+
+
+
+
+
 
 
         mAuth = FirebaseAuth.getInstance();

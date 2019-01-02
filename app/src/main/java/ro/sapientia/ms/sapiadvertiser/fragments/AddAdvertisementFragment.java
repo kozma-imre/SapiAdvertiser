@@ -95,6 +95,7 @@ public class AddAdvertisementFragment extends Fragment {
     private User mUser = new User();
     private ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
     private AddAdvRecycleAdapter advListRecycleAdapter;
+    private String id = null;
 
     public AddAdvertisementFragment() {
         // Required empty public constructor
@@ -118,7 +119,15 @@ public class AddAdvertisementFragment extends Fragment {
         mAdvertisementsRef = mFirebaseDatabase.getReference().child(Constants.ADVERTISEMENTS_CHILD);
         mUserRef = mFirebaseDatabase.getReference().child(Constants.USERS_CHILD);
 
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            id = bundle.getString("AdvId");
+        }
+
         getUser();
+        if (id != null) {
+            getAdvertisement();
+        }
 
 
         return view;
@@ -249,7 +258,12 @@ public class AddAdvertisementFragment extends Fragment {
 
         mAdvertisement.CreatorUser = new UserPreview();
         // Get the advertisement id
-        advId = mAdvertisementsRef.push().getKey();
+        if (id != null) {
+            advId = id;
+        } else {
+            advId = mAdvertisementsRef.push().getKey();
+        }
+
 
         mAdvertisement.CreatorUser.ImageUrl = mUser.ImageUrl;
         mAdvertisement.CreatorUser.Name = mUser.FirstName + " " + mUser.LastName;
@@ -269,7 +283,7 @@ public class AddAdvertisementFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mUser = dataSnapshot.getValue(User.class);
 
-                preFillInputFields();
+                preFillInputFieldsUser();
 
             }
 
@@ -280,7 +294,34 @@ public class AddAdvertisementFragment extends Fragment {
         });
     }
 
-    private void preFillInputFields() {
+    private void getAdvertisement() {
+        mAdvertisementsRef.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mAdvertisement = dataSnapshot.getValue(Advertisement.class);
+
+                preFillInputFieldsAdvertisement();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void preFillInputFieldsAdvertisement() {
+        title.setText(mAdvertisement.Title);
+        shortDescription.setText(mAdvertisement.ShortDescription);
+        longDescription.setText(mAdvertisement.LongDescription);
+        location.setText(mAdvertisement.Location);
+
+
+    }
+
+
+    private void preFillInputFieldsUser() {
         phoneInput.setNumber(mUser.PhoneNumber);
         phoneInput.setEnabled(false);
     }
