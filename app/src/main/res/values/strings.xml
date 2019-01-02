@@ -13,7 +13,7 @@
     <string name="login_btn_text">Login</string>
     <string name="new_account_text_link">Need a new account?</string>
     <string name="signup_btn_text">SignUp</string>
-    <string name="title_new_blog">New Advertisement</string>
+    <string name="title_new_blog">Add</string>
     <string name="signout_btn">SignOut</string>
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="invalid_phone_number">Invalid phone number. Try again.</string>
@@ -55,5 +55,8 @@
     <string name="advertisement_pictures_location">AdvertisementPictures</string>
     <string name="succes_upload_image">The image is uploaded</string>
     <string name="saved_data">The data is saved</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
