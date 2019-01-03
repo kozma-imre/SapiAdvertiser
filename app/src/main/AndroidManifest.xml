@@ -35,13 +35,7 @@
         <activity
             android:name=".activities.LogInActivity"
             android:label="@string/title_activity_login" />
-        <activity
-            android:name=".activities.AddAdvertisementActivity"
-            android:label="@string/title_activity_add_advertisements" />
 
-        <activity
-            android:name=".activities.ProfileActivity"
-            android:label="@string/title_activity_profile" />
         <activity
             android:name=".activities.MyAdvertisementsActivity"
             android:label="@string/title_activity_my_advertisements" />
