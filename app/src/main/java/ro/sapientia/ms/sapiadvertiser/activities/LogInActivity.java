@@ -224,6 +224,7 @@ public class LogInActivity extends AppCompatActivity {
                 verificationCode.setSoundEffectsEnabled(true);
                 loginBtn.setEnabled(true);
 
+
             } else {
                 loginBtn.setEnabled(false);
                 loginProgress.setVisibility(View.VISIBLE);

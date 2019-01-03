@@ -25,6 +25,7 @@
         android:id="@+id/advert_list_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
