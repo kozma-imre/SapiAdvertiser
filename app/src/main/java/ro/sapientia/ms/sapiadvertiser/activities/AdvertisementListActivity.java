@@ -44,6 +44,7 @@ public class AdvertisementListActivity extends AppCompatActivity {
     private DatabaseReference mUsersRef;
     private FirebaseDatabase mFirebaseDatabase;
 
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -69,6 +70,7 @@ public class AdvertisementListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advertisement_list);
 
@@ -79,7 +81,36 @@ public class AdvertisementListActivity extends AppCompatActivity {
         homeFragment = new HomeFragment();
         profileFragment = new ProfileFragment();
         addAdvertisementFragment = new AddAdvertisementFragment();
-        replaceFragment(homeFragment);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String myParam = extras.getString("edit");
+            Bundle bundle = new Bundle();
+            bundle.putString("AdvId", myParam);
+            addAdvertisementFragment.setArguments(bundle);
+            replaceFragment(addAdvertisementFragment);
+            String fragment = extras.getString("fragment");
+            switch (fragment) {
+                case "profile":
+                    replaceFragment(profileFragment);
+                    break;
+                case "new":
+                    replaceFragment(addAdvertisementFragment);
+                    break;
+                case "home":
+                    replaceFragment(homeFragment);
+                    break;
+                default:
+                    replaceFragment(homeFragment);
+            }
+        } else {
+            replaceFragment(homeFragment);
+        }
+
+
+
+
+
 
 
         mAuth = FirebaseAuth.getInstance();

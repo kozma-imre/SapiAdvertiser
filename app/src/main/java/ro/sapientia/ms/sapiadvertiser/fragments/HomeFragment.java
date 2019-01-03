@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,11 +35,10 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.adv_list_view)
     RecyclerView advListView;
     private List<Advertisement> advList;
-    private String mUserId;
+
     private AdvListRecycleAdapter advListRecycleAdapter;
 
 
-    private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mAdvertisementsRef;
 
@@ -55,16 +53,17 @@ public class HomeFragment extends Fragment {
 
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        getActivity().setTitle(R.string.title_activity_advertisement_list);
         ButterKnife.bind(this, view);
         advList = new ArrayList<>();
         advListView.setHasFixedSize(true);
 
         advListView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        mAuth = FirebaseAuth.getInstance();
+
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mAdvertisementsRef = mFirebaseDatabase.getReference().child(Constants.ADVERTISEMENTS_CHILD);
-        mUserId = mAuth.getCurrentUser().getUid();
+
 
         return view;
     }
@@ -92,7 +91,7 @@ public class HomeFragment extends Fragment {
                     if (adv.IsDeleted == false) {
                         advList.add(adv);
                     }
-                    advListRecycleAdapter = new AdvListRecycleAdapter(advList);
+                    advListRecycleAdapter = new AdvListRecycleAdapter(advList, getActivity());
                     advListView.setAdapter(advListRecycleAdapter);
                     advListRecycleAdapter.notifyDataSetChanged();
 

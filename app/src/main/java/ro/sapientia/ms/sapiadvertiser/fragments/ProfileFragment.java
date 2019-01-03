@@ -102,9 +102,11 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getActivity().setTheme(R.style.AppTheme);
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        getActivity().setTitle(R.string.title_activity_profile);
         ButterKnife.bind(this, view);
 
         mAuth = FirebaseAuth.getInstance();
@@ -118,6 +120,12 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        getActivity().setTheme(R.style.AppTheme);
+
+        super.onResume();
+    }
 
     private String getFileExtension(Uri uri) {
         ContentResolver cR = getActivity().getContentResolver();
