@@ -78,6 +78,7 @@ public class AdvertisementDetailActivity extends AppCompatActivity implements Ba
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advertisement_detail);
         // We get the data with the intent
@@ -188,8 +189,8 @@ public class AdvertisementDetailActivity extends AppCompatActivity implements Ba
                     .description(adv.Title)
                     .setRequestOption(requestOptions)
                     .setBackgroundColor(Color.WHITE)
-                    .setProgressBarVisible(true)
-                    .setOnSliderClickListener(AdvertisementDetailActivity.this);
+                    .setProgressBarVisible(true);
+            //.setOnSliderClickListener(AdvertisementDetailActivity.this);
 
             // add your extra information
             // sliderView.bundle(new Bundle());
@@ -263,7 +264,7 @@ public class AdvertisementDetailActivity extends AppCompatActivity implements Ba
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
 
-        sharingIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        sharingIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, adv.Title);
         sharingIntent.putExtra(Intent.EXTRA_TEXT, adv.LongDescription);
 

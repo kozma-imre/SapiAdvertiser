@@ -37,7 +37,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText lastNameText;
     @BindView(R.id.signup_progress)
     ProgressBar signupProgresBar;
-    @BindView(R.id.signup_btn)
+    @BindView(R.id.sign_up_btn)
     Button signupBtn;
     @BindView(R.id.my_phone_input)
     IntlPhoneInput phoneInput;
@@ -51,6 +51,7 @@ public class SignUpActivity extends AppCompatActivity {
     private User mUser = new User();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
@@ -99,7 +100,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-    @OnClick(R.id.signup_btn)
+    @OnClick(R.id.sign_up_btn)
     public void signup() {
         mUser.LastName = lastNameText.getText().toString();
         mUser.FirstName = firstNameText.getText().toString();

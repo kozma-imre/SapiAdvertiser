@@ -4,6 +4,7 @@ package ro.sapientia.ms.sapiadvertiser.fragments;
 import android.Manifest;
 import android.content.ClipData;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -11,9 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -97,6 +96,7 @@ public class AddAdvertisementFragment extends Fragment {
     private AddAdvRecycleAdapter advListRecycleAdapter;
     private String id = null;
 
+    private final int PICK_IMAGE_CAMERA = 1, PICK_IMAGE_GALLERY = 2;
     public AddAdvertisementFragment() {
         // Required empty public constructor
     }
@@ -105,10 +105,11 @@ public class AddAdvertisementFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_advertisement, container, false);
         ButterKnife.bind(this, view);
-
+        getActivity().setTitle(R.string.title_activity_add_advertisements);
         images.setHasFixedSize(true);
         images.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -138,53 +139,97 @@ public class AddAdvertisementFragment extends Fragment {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
-            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-
-
-                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-            } else {
-
-                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                gallery.setType("image/*");
-                startActivityForResult(gallery, PICK_IMAGE);
-
+            try {
+                PackageManager pm = getActivity().getPackageManager();
+                int hasPerm = pm.checkPermission(Manifest.permission.CAMERA, getActivity().getPackageName());
+                if (hasPerm == PackageManager.PERMISSION_GRANTED) {
+                    final CharSequence[] options = {"Take Photo", "Choose From Gallery", "Cancel"};
+                    android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getActivity());
+                    builder.setTitle("Select Option");
+                    builder.setItems(options, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int item) {
+                            if (options[item].equals("Take Photo")) {
+                                dialog.dismiss();
+                                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                startActivityForResult(intent, PICK_IMAGE_CAMERA);
+                            } else if (options[item].equals("Choose From Gallery")) {
+                                dialog.dismiss();
+                                Intent pickPhoto = new Intent(Intent.ACTION_PICK);
+                                pickPhoto.setType("image/*");
+                                pickPhoto.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                                pickPhoto.setAction(Intent.ACTION_GET_CONTENT);
+                                startActivityForResult(pickPhoto, PICK_IMAGE_GALLERY);
+                            } else if (options[item].equals("Cancel")) {
+                                dialog.dismiss();
+                            }
+                        }
+                    });
+                    builder.show();
+                } else
+                    Toast.makeText(getActivity(), "Camera Permission error", Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                Toast.makeText(getActivity(), "Camera Permission error", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
             }
         }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        try {
-            // When an Image is picked
-            if (requestCode == PICK_IMAGE && resultCode == getActivity().RESULT_OK && null != data) {
-                // Get the Image from data
-                mAdvertisement.ImageUrls = new ArrayList<String>();
-                if (data.getData() != null) {
-                    mArrayUri.add(0, data.getData());
-                    callRecycleAdapter(mArrayUri);
 
-                } else {
-                    if (data.getClipData() != null) {
-                        ClipData mClipData = data.getClipData();
-                        for (int i = 0; i < mClipData.getItemCount(); i++) {
-                            ClipData.Item item = mClipData.getItemAt(i);
-                            Uri uri = item.getUri();
-                            mArrayUri.add(i, uri);
-                        }
-
+        if (requestCode == PICK_IMAGE_CAMERA) {
+            try {
+                // When an Image is picked
+                if (resultCode == getActivity().RESULT_OK && null != data) {
+                    // Get the Image from data
+                    mAdvertisement.ImageUrls = new ArrayList<String>();
+                    if (data.getData() != null) {
+                        mArrayUri.add(0, data.getData());
                         callRecycleAdapter(mArrayUri);
+
                     }
+                } else {
+                    Toast.makeText(getActivity(), "You haven't picked Image",
+                            Toast.LENGTH_LONG).show();
                 }
-            } else {
-                Toast.makeText(getActivity(), "You haven't picked Image",
-                        Toast.LENGTH_LONG).show();
+            } catch (Exception e) {
+                Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_LONG)
+                        .show();
             }
-        } catch (Exception e) {
-            Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_LONG)
-                    .show();
+        } else if (requestCode == PICK_IMAGE_GALLERY && resultCode == getActivity().RESULT_OK && null != data) {
+            mAdvertisement.ImageUrls = new ArrayList<String>();
+            if (data.getData() != null) {
+                mArrayUri.add(0, data.getData());
+                callRecycleAdapter(mArrayUri);
+            }
+            if (data.getClipData() != null) {
+                ClipData mClipData = data.getClipData();
+                int count = data.getClipData().getItemCount(); //evaluate the count before the for loop --- otherwise, the count is evaluated every loop.
+                for (int i = 0; i < count; i++) {
+                    ClipData.Item item = mClipData.getItemAt(i);
+                    Uri uri = item.getUri();
+                    mArrayUri.add(i, uri);
+                }
+
+                callRecycleAdapter(mArrayUri);
+            }
+        } else {
+            if (data.getClipData() != null) {
+                ClipData mClipData = data.getClipData();
+                int count = data.getClipData().getItemCount(); //evaluate the count before the for loop --- otherwise, the count is evaluated every loop.
+                for (int i = 0; i < count; i++) {
+                    ClipData.Item item = mClipData.getItemAt(i);
+                    Uri uri = item.getUri();
+                    mArrayUri.add(i, uri);
+                }
+
+                callRecycleAdapter(mArrayUri);
+            }
+            super.onActivityResult(requestCode, resultCode, data);
         }
 
-        super.onActivityResult(requestCode, resultCode, data);
+
     }
 
     private void callRecycleAdapter(ArrayList<Uri> mArrayUri) {

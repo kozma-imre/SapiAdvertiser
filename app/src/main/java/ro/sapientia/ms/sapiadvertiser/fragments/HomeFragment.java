@@ -53,6 +53,7 @@ public class HomeFragment extends Fragment {
 
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        getActivity().setTitle(R.string.title_activity_advertisement_list);
         ButterKnife.bind(this, view);
         advList = new ArrayList<>();
         advListView.setHasFixedSize(true);
