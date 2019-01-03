@@ -4,11 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +20,9 @@ import com.google.firebase.database.ValueEventListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ro.sapientia.ms.sapiadvertiser.R;
+import ro.sapientia.ms.sapiadvertiser.fragments.AddAdvertisementFragment;
+import ro.sapientia.ms.sapiadvertiser.fragments.HomeFragment;
+import ro.sapientia.ms.sapiadvertiser.fragments.ProfileFragment;
 import ro.sapientia.ms.sapiadvertiser.utils.Constants;
 
 // if you put your Activities files to another folder than the default one. You need to import the
@@ -30,14 +33,17 @@ public class AdvertisementListActivity extends AppCompatActivity {
 
     private static final String TAG = "ADVLIST ACTIVITY";
 
-    @BindView(R.id.signout_btn)
-    Button signoutButton;
+
     @BindView(R.id.navigation)
     BottomNavigationView mNavigation;
+    private HomeFragment homeFragment;
+    private ProfileFragment profileFragment;
+    private AddAdvertisementFragment addAdvertisementFragment;
     private FirebaseAuth mAuth;
     private String mUserId;
     private DatabaseReference mUsersRef;
     private FirebaseDatabase mFirebaseDatabase;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -46,34 +52,65 @@ public class AdvertisementListActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-
-                    break;
+                    replaceFragment(homeFragment);
+                    return true;
                 case R.id.navigation_profile:
-                    Intent profileIntent = new Intent(AdvertisementListActivity.this, ProfileActivity.class);
-                    startActivity(profileIntent);
-
-
-                    break;
+                    replaceFragment(profileFragment);
+                    return true;
                 case R.id.navigation_new_blog:
-                    Intent addAdvertisementIntent = new Intent(AdvertisementListActivity.this, AddAdvertisementActivity.class);
-                    startActivity(addAdvertisementIntent);
-                    finish();
-                    break;
+                    replaceFragment(addAdvertisementFragment);
+                    return true;
+                default:
+                    return false;
             }
-            return false;
+
         }
     };
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_advertisement_list);
 
+
         ButterKnife.bind(AdvertisementListActivity.this);
 
-        //mTextMessage = (TextView) findViewById(R.id.message);
-        //BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        // FRAGMENTS
+        homeFragment = new HomeFragment();
+        profileFragment = new ProfileFragment();
+        addAdvertisementFragment = new AddAdvertisementFragment();
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String myParam = extras.getString("edit");
+            Bundle bundle = new Bundle();
+            bundle.putString("AdvId", myParam);
+            addAdvertisementFragment.setArguments(bundle);
+            replaceFragment(addAdvertisementFragment);
+            String fragment = extras.getString("fragment");
+            switch (fragment) {
+                case "profile":
+                    replaceFragment(profileFragment);
+                    break;
+                case "new":
+                    replaceFragment(addAdvertisementFragment);
+                    break;
+                case "home":
+                    replaceFragment(homeFragment);
+                    break;
+                default:
+                    replaceFragment(homeFragment);
+            }
+        } else {
+            replaceFragment(homeFragment);
+        }
+
+
+
+
+
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -84,18 +121,10 @@ public class AdvertisementListActivity extends AppCompatActivity {
 
         checkIfUserSignedup();
 
+
         mNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        signoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-                Intent intent = new Intent(AdvertisementListActivity.this, LogInActivity.class);
-                startActivity(intent);
-                finish();
 
-            }
-        });
     }
 
 
@@ -120,5 +149,10 @@ public class AdvertisementListActivity extends AppCompatActivity {
         });
     }
 
+    private void replaceFragment(Fragment fragment) {
 
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.main_container, fragment);
+        fragmentTransaction.commit();
+    }
 }

@@ -39,7 +39,7 @@ public class MyAdvertisementsActivity extends AppCompatActivity {
     BottomNavigationView navigation;
     @BindView(R.id.advert_list_view)
     RecyclerView advertListView;
-
+    private String id;
     private List<Advertisement> advList;
     private String mUserId;
     private AdvertisementsRecyclerAdapter advertisementsRecyclerAdapter;
@@ -47,26 +47,37 @@ public class MyAdvertisementsActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mAdvertisementsRef;
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_advertisements);
-
-        ButterKnife.bind(MyAdvertisementsActivity.this);
-        advList = new ArrayList<>();
-        advertListView.setHasFixedSize(true);
-
-        advertListView.setLayoutManager(new LinearLayoutManager(this));
-
-        mAuth = FirebaseAuth.getInstance();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mAdvertisementsRef = mFirebaseDatabase.getReference().child(Constants.ADVERTISEMENTS_CHILD);
-        mUserId = mAuth.getCurrentUser().getUid();
-
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    Intent homeIntent = new Intent(MyAdvertisementsActivity.this, AdvertisementListActivity.class);
+                    id = "home";
+                    homeIntent.putExtra("fragment", id);
+                    startActivity(homeIntent);
+                    finish();
+                    break;
+                case R.id.navigation_profile:
+                    Intent profileIntent = new Intent(MyAdvertisementsActivity.this, AdvertisementListActivity.class);
+                    id = "profile";
+                    profileIntent.putExtra("fragment", id);
+                    startActivity(profileIntent);
+                    finish();
+                    break;
+                case R.id.navigation_new_blog:
+                    Intent newIntent = new Intent(MyAdvertisementsActivity.this, AdvertisementListActivity.class);
+                    id = "new";
+                    newIntent.putExtra("fragment", id);
+                    startActivity(newIntent);
+                    finish();
+                    break;
+            }
+            return false;
+        }
+    };
 
     @Override
     protected void onStart() {
@@ -106,30 +117,23 @@ public class MyAdvertisementsActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_my_advertisements);
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        ButterKnife.bind(MyAdvertisementsActivity.this);
+        advList = new ArrayList<>();
+        advertListView.setHasFixedSize(true);
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    Intent mainScreenIntent = new Intent(MyAdvertisementsActivity.this, AdvertisementListActivity.class);
-                    startActivity(mainScreenIntent);
-                    finish();
-                    break;
-                case R.id.navigation_profile:
-                    Intent profileScreenIntent = new Intent(MyAdvertisementsActivity.this, ProfileActivity.class);
-                    startActivity(profileScreenIntent);
-                    finish();
-                    break;
-                case R.id.navigation_new_blog:
-                    Intent addAdvertisementIntent = new Intent(MyAdvertisementsActivity.this, AddAdvertisementActivity.class);
-                    startActivity(addAdvertisementIntent);
-                    finish();
-                    break;
-            }
-            return false;
-        }
-    };
+        advertListView.setLayoutManager(new LinearLayoutManager(this));
+
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mAdvertisementsRef = mFirebaseDatabase.getReference().child(Constants.ADVERTISEMENTS_CHILD);
+        mUserId = mAuth.getCurrentUser().getUid();
+
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
 }

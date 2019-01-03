@@ -24,12 +24,12 @@
             tools:srcCompat="@tools:sample/avatars[0]" />
 
         <Button
-            android:id="@+id/signup_btn"
+            android:id="@+id/sign_up_btn"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/signup_btn_text"
+            android:text="@string/sign_up_btn_text"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +43,7 @@
             android:layout_marginTop="20dp"
             android:background="@android:color/background_light"
             android:ems="10"
-            android:hint="@string/lastname_edittext_hint"
+            android:hint="@string/last_name_edit_text_hint"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +56,7 @@
             android:layout_marginTop="64dp"
             android:background="@android:color/background_light"
             android:ems="10"
-            android:hint="@string/firstname_edittext_hint"
+            android:hint="@string/first_name_edit_text_hint"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.125"

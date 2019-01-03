@@ -1,30 +1,33 @@
 <resources>
-    <string name="app_name">SapiAdvertiser</string>
+    <string name="app_name">Sapi Advertiser</string>
 
-    <string name="title_activity_advertisement_list">AdvertisementListActivity</string>
+    <string name="title_activity_advertisement_list">Advertisements</string>
+    <string name="title_activity_sign_up">Sign up</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_add_advertisements">Create Advertisement</string>
     <string name="title_home">Home</string>
-    <string name="title_profile">Profile</string>
+
     <string name="title_dashboard">Dashboard</string>
     <string name="title_save">Save</string>
     <string name="title_notifications">Notifications</string>
-    <string name="title_activity_profile">ProfileActivity</string>
-    <string name="title_activity_my_advertisements">MyAdvertisementsActivity</string>
-    <string name="phonenumber_edittext_hint">Phone Number</string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_my_advertisements">My Advertisements</string>
+    <string name="phone_number_edit_text_hint">Phone Number</string>
     <string name="login_btn_text">Login</string>
     <string name="new_account_text_link">Need a new account?</string>
-    <string name="signup_btn_text">SignUp</string>
-    <string name="title_new_blog">New Advertisement</string>
-    <string name="signout_btn">SignOut</string>
-    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="sign_up_btn_text">Sign Up</string>
+    <string name="title_new_blog">Add</string>
+    <string name="sign_out_btn">Sign Out</string>
+    <string name="title_activity_fullscreen">Fullscreen</string>
     <string name="invalid_phone_number">Invalid phone number. Try again.</string>
     <string name="invalid_credential">Invalid Credential.</string>
     <string name="too_many_requests">Too many requests.</string>
     <string name="verify_code">Verify code.</string>
-    <string name="loading_advertisers">Loading advertisers...</string>
+    <string name="loading_advertisers">Loading advertisers…</string>
     <string name="error_first_name">First name required.</string>
     <string name="error_last_name">Last name required.</string>
-    <string name="firstname_edittext_hint">First Name</string>
-    <string name="lastname_edittext_hint">Last Name</string>
+    <string name="first_name_edit_text_hint">First Name</string>
+    <string name="last_name_edit_text_hint">Last Name</string>
     <string name="permission_denied">Permission Denied</string>
     <string name="permission_granted">You already have permission </string>
     <string name="existing_account_text_link">Already have an account?</string>
@@ -52,8 +55,10 @@
     <string name="error_short_description">Short description required</string>
     <string name="error_long_description">Long description required</string>
     <string name="error_location">Location required</string>
-    <string name="advertisement_pictures_location">AdvertisementPictures</string>
-    <string name="succes_upload_image">The image is uploaded</string>
+    <string name="advertisement_pictures_location">Advertisement Pictures</string>
+    <string name="success_upload_image">The image is uploaded</string>
     <string name="saved_data">The data is saved</string>
+    <string name="title_profile">Profile</string>
+
 
 </resources>
