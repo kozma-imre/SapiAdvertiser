@@ -229,7 +229,7 @@ public class ProfileActivity extends AppCompatActivity {
                                     mainImageURI = null;
                                     mUser.ImageUrl = uri.toString();
                                     mUsersRef.child(mUser.Id).setValue(mUser);
-                                    
+
                                     Toast.makeText(ProfileActivity.this, "The data is saved", Toast.LENGTH_LONG).show();
                                     setupProgress.setVisibility(View.INVISIBLE);
                                     updateAdvertisments();

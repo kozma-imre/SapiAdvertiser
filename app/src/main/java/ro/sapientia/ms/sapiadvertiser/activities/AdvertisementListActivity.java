@@ -146,9 +146,9 @@ public class AdvertisementListActivity extends AppCompatActivity {
             return false;
         }
     };
-}
 
-/*
+
+
     private void checkIfUserSignedup() {
         mAdvertisementsRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -170,5 +170,5 @@ public class AdvertisementListActivity extends AppCompatActivity {
         });
     }
 
-*/
-//}
+
+}
